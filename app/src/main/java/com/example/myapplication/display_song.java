@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,33 +15,19 @@ import java.util.ArrayList;
 
 public class display_song extends AppCompatActivity{
     MyRecyclerViewAdapter adapter;
+    ArrayList<String> Song_list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display_song);
-
-        // Demo song list
-        ArrayList<String> songNames = new ArrayList<>();
-        songNames.add("Song1");
-        songNames.add("Song2");
-        songNames.add("Song3");
-        songNames.add("Song4");
-        songNames.add("Song5");
-        songNames.add("Song6");
-        songNames.add("Song7");
-        songNames.add("Song8");
-        songNames.add("Song9");
-        songNames.add("Song10");
-        songNames.add("Song11");
-        songNames.add("Song12");
-        songNames.add("Song13");
-        songNames.add("Song14");
-        songNames.add("Song16");
+        Intent intent = getIntent();
+        Song_list = intent.getStringArrayListExtra("Song_list");
 
         // set up the RecyclerView
         final RecyclerView recyclerView = findViewById(R.id.song_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MyRecyclerViewAdapter(this, songNames, "display_song");
+        adapter = new MyRecyclerViewAdapter(this, Song_list, "display_song");
         recyclerView.setAdapter(adapter);
         adapter.setItemClickListener(new MyRecyclerViewAdapter.OnRecyclerViewClickListener() {
 
